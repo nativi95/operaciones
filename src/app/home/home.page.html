@@ -1,20 +1,32 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Realizar operaciones
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form [formGroup]="formulario" (ngSubmit)="CalcularOperaciones()">
+    <ion-list>
+      <ion-item>
+        <ion-icon name="logo-ionitron" slot="start"></ion-icon>
+        <ion-label position="stacked">Numero 1</ion-label>
+        <ion-input formControlName="n1" type="number" placeholder="Digite el primer numero"></ion-input>
+      </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+      <ion-item>
+        <ion-icon name="logo-ionitron" slot="start"></ion-icon>
+        <ion-label position="stacked">Numero 2</ion-label>
+        <ion-input formControlName="n2" type="number" placeholder="Digite el segundo numero"></ion-input>
+      </ion-item>
+
+      <div class="ion-padding">
+        <ion-button expand="full" type="submit" [disabled]="!formulario.valid">
+          <ion-icon name="calculator" slot="end"></ion-icon>
+          Calcular
+        </ion-button>
+      </div>
+    </ion-list>
+  </form>
 </ion-content>
