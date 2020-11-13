@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +10,11 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class HomePage {
 
   formulario: FormGroup;
+  recibido: any[];
+  suma: number = 0;
+  mensaje: string;
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder, public toastCtrl: ToastController) {
     this.formulario = this.createForm();
   }
 
@@ -23,8 +26,23 @@ export class HomePage {
   }
 
   CalcularOperaciones() {
-    console.log("++++++++++++=boton++++++++++++")
     console.log(this.formulario.value);
+
+    this.recibido = this.formulario.value;
+    console.log(parseInt(this.recibido['n1']) + parseInt(this.recibido['n2']));
+    this.suma = parseInt(this.recibido['n1']) + parseInt(this.recibido['n2']);
+
+    this.mensaje = 'La suma de los numeros ' + this.recibido['n1'] + ' y ' + this.recibido['n2'] + ' es ' + this.suma;
+    this.mostrarToast(this.mensaje);
+  }
+
+  async mostrarToast(msj: string) {
+    const toast = await this.toastCtrl.create({
+      message: msj,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 
 }
